@@ -1,0 +1,43 @@
+1. Как удалить все запущенные и остановленные контейнеры на хосте? (Выбери 3)
+docker container rm -f $(docker container ps -aq)
+docker rm -f $(docker ps -aq)
+docker container rm -f $(docker container ls -aq)
+
+2. Какая из команд создаст (не запустит) контейнер с образом redis и именем redis?
+docker container create --name redis redis
+
+3. Мы развернули несколько контейнеров. Как увидеть, какой из них потребляет больше всего памяти?
+docker container stats
+
+4. Как запустить контейнер с названием webserver  с образом nginx в интерактивном режиме? (Выбери 2)
+docker container run -it --name webserver nginx
+docker run -it --name webserver nginx
+
+5. Какая команда используется для обновления restart policy контейнера redis в значение always?
+docker container update --restart always redis
+
+6. Как скопировать директорию nginx из контейнера webapp на хост по пути /tmp/?
+docker container cp webapp:/etc/nginx /tmp/
+
+7. Какой командой мы можем проверить драйвер логирования по умолчанию?
+docker system info
+
+8. Как запустить контейнер redis и быть уверенным, что для него не будет настроено логов?
+docker run -it -d --log-driver none redis
+
+9. Как проверить статус службы docker на хосте?
+sudo systemctl status docker
+
+10. При помощи какого механизма Docker сопоставляет порты контейнера и хоста?
+При помощи правил IPTables
+
+11. Какой флаг настроит Docker на проброс порта 80 UDP в контейнере на порт 8080 докер-хоста?
+-p 8080:80/udp
+
+12. Какой командой мы можем получить сводку важной информации о контейнере webapp (например сетевые адреса, переменные окружения, политику рестарта и т.д.)?
+docker container inspect webapp
+
+13. Чем из приведенного мы можем получить поток логов контейнера my-app?
+docker container logs -f my-app
+
+
