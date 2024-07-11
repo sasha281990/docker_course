@@ -1,0 +1,30 @@
+1.  Запусти контейнер rotorocloud/simple-webapp-rockets с тегом v2, сопоставь порт 8080 контейнера к порту 30123 хоста.
+docker run -d -p 30123:8080 rotorocloud/simple-webapp-rockets:v2
+
+2. Мы ошиблись при запуске контейнера webportal, его внешний порт должен быть 30500. Исправь это. Не забудь назвать его webportal.
+Посмотри информацию о старом контейнере. Порты невозможно переопределить на запущенном контейнере.
+Остановите выполняемый контейнер:
+docker stop webportal
+
+Удалите контейнер:
+docker rm webportal
+
+Запустите контейнер снова с правильной настройкой порта и дайте ему имя webportal:
+docker run -d --name webportal -p 30500:80 nginx:alpine
+
+3. Запусти контейнер agentx приведённой ниже командой. Перед проверкой убедись, что agentx исполняется.
+docker run --name=agentx -p 30880:80 -d --restart always nginx
+
+4. Какой MacAddress адрес у контейнера agentx?
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' agentx
+
+5. Какой внутренний IP адрес у контейнера agentx?
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' agentx
+
+6. Посмотреть логи
+docker logs agentx
+
+
+
+
+
