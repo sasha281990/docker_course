@@ -1,0 +1,48 @@
+1. Какая версия Docker Server Engine запущена на хосте?
+docker version
+
+2. Сколько контейнеров запущено (RUNNING) на хосте?
+docker ps
+
+3. Сколько images доступно на хосте?
+docker images
+
+4. Запусти контейнер используя образ redis.
+docker run -d redis
+
+5. Останови только что созданный контейнер.
+docker stop {container_id}
+
+6. Сколько контейнеров запущено (RUNNING) на хосте?
+docker ps
+
+7. Сколько контейнеров всего (PRESENT) на хосте?
+docker ps -a
+
+8. Какое состояние у остановленного контейнера с alpine?
+docker inspect --format '{{.State.Status}}' container_id_or_name
+
+9. Удали все контейнеры с докер-хоста.
+Остановика всех работающих контейнеров:
+docker stop $(docker ps -a -q)
+Удаление всех контейнеров:
+docker rm $(docker ps -a -q)
+
+10. Удали образ ubuntu.
+docker rmi ubuntu
+Принудительное удаление
+docker rmi -f ubuntu
+
+11. Тебе нужен докер-образ, который потребуется для запуска позже. Скачай образ nginx:1.19-alpine
+docker pull nginx:1.19-alpine
+
+12. Запусти контейнер с образом nginx:1.19-alpine и назови его webapp.
+docker run -d --name webapp nginx:1.19-alpine
+
+13. Cleanup: Удали все images на хосте.
+Если потребуется, удали контейнеры.
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+Затем удаляем все образы:
+docker rmi $(docker images -q)
+
