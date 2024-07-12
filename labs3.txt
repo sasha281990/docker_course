@@ -1,1 +1,34 @@
+1. Сколько images доступно на докер-хосте?
+docker images
+
+2. Мы только что спуллили новый образ. Какой тег у нового образа NGINX?
+docker images | grep nginx
+
+3. В какое расположение внутри контейнера будет скопирован исходный код во время создания образа?
+Исследуй Dockerfile в директории webapp-rockets.
+cat webapp-rockets/Dockerfile
+
+4. Создай докер-образ используя этот Dockerfile и назови его webapp-rockets. Не присваивай никаких тегов.
+docker build -t webapp-rockets -f ./webapp-rockets/Dockerfile .
+
+5. Какой примерный размер образа webapp-rockets?
+docker images | grep webapp-rockets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
