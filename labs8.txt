@@ -1,0 +1,24 @@
+1. В каком месте хранятся файлы, связанные с docker-контейнерами и docker-образами?
+/var/lib/docker/
+
+2. Запусти контейнер с mysql и дай ему имя mysql-db (используй образ mysql). Установи ROOT-пароль к базе данных в db_pass123
+docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 -d mysql
+
+3. Запусти mysql-контейнер снова, но в этот раз подключи том (volume) к контейнеру. В томе данные будут на постоянном хранении по размещению /opt/data на хосте.
+Используй тоже самое имя: mysql-db и тот же пароль: db_pass123, как и ранее. Mysql хранит данные в /var/lib/mysql внутри контейнера.
+
+docker run --name mysql-db \
+  -v /opt/data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=db_pass123 \
+  -d mysql
+
+4. У нас снова падение! Все контейнеры снова уничтожены. Но теперь все наши данные хранятся в директории /opt/data. Разверни БД в новом экземпляре mysql, используя те же параметры.
+Просто запусти предыдущую команду для запуска контейнера. Можешь взять ее отсюда: docker run -v /opt/data:/var/lib/mysql -d --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+
+docker run -v /opt/data:/var/lib/mysql -d --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+
+
+
+
+
+
