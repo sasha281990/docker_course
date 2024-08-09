@@ -1,0 +1,98 @@
+1. Какие компоненты входят в Docker Engine?
+
+Docker daemon, Docker client, Docker Compose, Docker Content Trust, Credential Helper
+Images, Containers, Volumes
+REST API, Docker Daemon
+x Docker Cli, Docker Daemon, REST API
+
+2. Какой компонент Docker управляет образами, контейнерами, томами и сетями?
+
+REST API
+x Docker Daemon
+Docker CLI
+
+3. Какой компонент по умолчанию отвечает за управление контейнерами в современных поставках Docker в Linux?
+
+Docker API
+x LibContainer
+LXC
+
+4. Можем ли запускать контейнеры без установки Docker?
+
+Нет
+x Да
+
+5. Какой компонент отвечает за поддержание контейнеров в живом состоянии, когда Docker Daemon отключается?
+
+RunC
+LibContainer
+Containerd
+x Containerd-Shim
+
+6. Какими объектами управляет Docker Engine?
+
+LibContainer
+x Networks, Volumes, Images, Containers
+Containerd
+RunC
+
+7. Данные внутри контейнера по умолчанию являются постоянными?
+
+x Нет
+Да
+
+8. Какая из этих сущностей используется только для чтения и является шаблоном для создания контейнеров?
+
+Docker Networks
+x Docker images
+Docker Containers
+Docker Volumes
+
+9. Где по умолчанию Docker хранит свои данные?
+
+x /var/lib/docker
+/home/docker
+/var/log/docker
+/etc/docker
+
+10. Какая команда покажет версию Docker Engine?
+
+docker --version
+x docker version
+docker engine info
+docker info engine
+
+11. По умолчанию все файлы внутри контейнера находятся в записываемом слое контейнера?
+
+Нет
+x Да
+
+12. Тома (Volumes) являются предпочтительным механизмом для организации постоянного хранения для докер-контейнеров?
+
+x Да
+Нет
+
+13. Какой командой мы можем удалить неиспользуемые тома?
+
+x docker volume prune
+docker volume rm some-vol
+docker container rm some-vol
+docker volume rm --all
+
+14. Какие опции используются для монтирования томов? (Выбери 3)
+
+x --volume
+--volume-mount
+x -v
+x --mount
+
+15. Какая из команд будет правильной для запуска контейнера webserver с томом secure-vol, который смонтирован в директорию назначения /opt  внутри контейнера в режиме readonly? (Выбери 4)
+
+docker run -d --name webserver -v secure-vol:/opt:readonly nginx
+x docker run -d --name webserver --mount source=secure-vol,target=/opt,readonly nginx
+x docker run -d --name webserver -v secure-vol:/opt:ro nginx
+x docker run -d --name webserver --mount source=secure-vol,target=/opt,ro nginx
+x docker run -d --name webserver --volume secure-vol:/opt:ro nginx
+
+
+
