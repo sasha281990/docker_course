@@ -1,0 +1,14 @@
+1. Какая команда выполняется при запуске контейнера, созданного из Dockerfile с названием ubuntu?
+docker image inspect ubuntu | jq '.[0].Config.Cmd'
+
+2. Запусти контейнер из образа ubuntu и переопредели команду (CMD) для старта в контейнере, заменив ее на sleep 1000.
+docker run -d ubuntu sleep 1000
+
+
+
+
+
+
+
+
+
