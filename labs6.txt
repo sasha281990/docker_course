@@ -1,0 +1,53 @@
+1. Сначала создай контейнер с базой данных redis с названием redis и образом redis.
+docker run --name redis -d redis
+
+2. Далее, создай контейнер rocketcounter из образа rotorocloud/rocket-counter, задай связь с приложением redis при помощи механизма link и после выставь его на порт 8085 хоста.
+Приложение rocketcounter работает на порту 5000 в контейнере.
+Если ты не уверен, посмотри в подсказке точную команду.
+docker run -d --name rocketcounter --link redis:redis -p 8085:5000 rotorocloud/rocket-counter
+
+3. Мы вручную собрали работающее приложение. Теперь давай приберём за собой.
+Удали контейнеры redis и rocketcounter.
+docker stop redis rocketcounter
+docker rm redis rocketcounter
+
+4. Создай файл docker-compose.yml в директории /root/rocketcounter. Обрати внимание, что расширение YML. Как будет готово, запусти docker-compose up -d.
+Файл docker-compose должен быть с такой спецификацией:
+redis service:
+Image: redis.
+rocketcounter service:
+Image: rotorocloud/rocket-counter
+App port: 5000
+Host-port: 8085
+
+Создайте директорию /root/rocketcounter (если она еще не существует):
+mkdir -p /root/rocketcounter
+
+Создайте файл docker-compose.yml с указанным содержанием, используя текстовый редактор (например, nano):
+nano /root/rocketcounter/docker-compose.yml
+Содержимое:
+version: '3'
+services:
+  redis:
+    image: redis
+  rocketcounter:
+    image: rotorocloud/rocket-counter
+    ports:
+      - "8085:5000"
+    depends_on:
+      - redis
+
+
+Запустите docker-compose:
+cd /root/rocketcounter
+docker-compose up -d
+
+5. Увеличь количество реплик rocketcounter до 2.
+Пользуйся средствами docker-compose
+cd /root/rocketcounter
+docker-compose up -d --scale rocketcounter=2
+
+6. Полностью удали стек docker-compose.
+Убедись, что Docker Compose корректно уничтожил все контейнеры и сети.
+cd /root/rocketcounter
+docker-compose down
