@@ -1,0 +1,76 @@
+1. Как получить список доступных по умолчанию сетей в Docker?
+
+docker ps network
+docker network get
+docker network --filter
+x docker network ls
+
+2. Какой командой можно посмотреть настройки сети и назначенный IP-адрес контейнера с id 7206cfc5e8ae и образом redis?
+
+docker inspect redis
+docker container ls 7206cfc5e8ae
+x docker inspect 7206cfc5e8ae
+docker container ls redis
+
+3. Какой сетевой драйвер будет использован по умолчанию, если ты не указал его явно?
+
+overlay
+host
+macvlan
+x bridge
+
+4. Какой тип сети следует выбрать, чтобы сетевой стек контейнера не был изолирован от хоста, а использовал его сетевое пространство, а также чтобы у контейнера не было бы своего собственного IP-адреса?
+
+macvlan
+overlay
+x host
+bridge
+
+5. Как узнать подсеть и шлюз сети 3afa2bbcfce8?
+
+docker info 3afa2bbcfce8
+docker network ls --no-trunc
+x docker inspect 3afa2bbcfce8
+x docker network inspect 3afa2bbcfce8
+
+6. Что из приведенных команд создаст пользовательскую мостовую сеть с названием stage-ns? (Выбери 3)
+
+x docker network create --driver bridge stage-ns
+x docker network create stage-ns
+x docker network create -d bridge stage-ns
+docker network create --type bridge stage-ns
+docker create network stage-ns
+
+7. Какая команда подключит работающий контейнер с именем feature к существующей мостовой сети stage-ns?
+
+docker container connect feature stage-ns
+x docker network connect stage-ns feature
+docker network connect feature stage-ns
+docker container connect stage-ns feature
+
+8. Какая команда отключит работающий контейнер с именем feature от мостовой сети stage-ns?
+
+docker network disconnect feature
+x docker network disconnect stage-ns feature
+docker network rm stage-ns feature
+docker network disconnect feature stage-ns
+
+9. Как можно удалить все неиспользуемые сети?
+
+x docker network prune
+docker network rm --all
+docker network update --delete-all
+docker network rm stage-ns
+
+10. Как удалить сеть stage-ns?
+
+x docker network rm stage-ns
+docker network inspect stage-ns
+docker network create stage-ns
+docker network connect stage-ns
+
+
+
+
+
+
