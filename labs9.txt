@@ -1,0 +1,36 @@
+1. Исследуй текущее окружение Docker и определи, какое количество networks присутствует в системе.
+        docker network ls
+
+2. Какой ID соответствует мостовой сети (bridge network)?
+        4de612d92ed4
+
+3. Мы только что запустили контейнер с названием alpine-1. Определи к какой сети он присоединен.
+        docker inspect -f '{{.NetworkSettings.Networks}}' alpine-1
+
+4. Запусти контейнер с названием alpine-2 с помощью образа alpine и прикрепи его к сети none.
+Сделай так, чтобы контейнер не останавливался после запуска.
+Name: alpine-2 attached to none network
+        docker run --name alpine-2 --network=none -dit alpine
+
+5. Какие сетевые интерфейсы расположены внутри контейнера alpine-2, который подключен к сети none?
+        docker exec alpine-2 ifconfig
+
+6. Какая подсеть сконфигурирована в сети bridge?
+        docker network inspect bridge
+
+7. Создай новую сеть с названием wp-mysql-network, которая будет использовать сетевой драйвер bridge. Назначь ей 172.22.0.0/24 подсеть. Настрой Gateway 172.22.0.1.
+        docker network create --driver bridge --subnet=172.22.0.0/24 --gateway=172.22.0.1 wp-mysql-network
+
+8. Разверни базу mysql с помощью образа mysql. Контейнер должен называться mysql-db. Прикрепи его к только что созданной сети wp-mysql-network.
+Установи пароль для использования базы данных db_pass123. Переменная окружения, ответственная за это MYSQL_ROOT_PASSWORD.
+        docker run --name mysql-db --network wp-mysql-network -e MYSQL_ROOT_PASSWORD=db_pass123 -d mysql
+
+9. Разверни веб-приложение с названием webapp, используй образ rotorocloud/webapp-mysql. Опубликуй его на порту 30080 хоста.
+Приложение использует две переменные окружения:
+1: DB_Host со значением mysql-db.
+2: DB_Password со значением db_pass123.
+Убедись, что прикрепил вновь созданную сеть wp-mysql-network.
+        docker run --name webapp --network wp-mysql-network -p 30080:8080 -e DB_Host=mysql-db -e DB_Password=db_pass123 -d rotorocloud/webapp-mysql
+
+
+
