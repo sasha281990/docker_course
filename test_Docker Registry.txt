@@ -1,0 +1,72 @@
+1. Ты логинишься при помощи команды docker login , данные для аутентификации сохраняются локально. Где находятся эти креденшилс?
+
+/var/lib/docker/.docker/config.json
+/var/lib/docker/containers/.docker/config.json
+/etc/docker/.docker/config.json
+х $HOME/.docker/config.json
+
+2. Что из этого верный адрес для докер-образа, имя которого webapp-rockets, а организация, владеющая этим образом rocketcorp, держит его в приватном реджистри по адресу registry.group-x.money?
+
+webapp-rockets/registry.group-x.money/rocketcorp
+rocketcorp/registry.group-x.money/webapp-rockets
+х registry.group-x.money/rocketcorp/webapp-rockets
+registry.group-x.money/webapp-rockets/rocketcorp
+
+3. Какая команда используется для поиска образов с именем, содержащим в себе nginx , и по крайней мере с 15 звездами? Мы хотим ограничить вывод тремя строками.
+
+docker find --max 3 --filter=stars=15 nginx
+docker search --filter=stars=15 nginx
+х docker search --filter=stars=15 --limit 3 nginx
+docker search --sort=stars=15 --limit 3 nginx
+
+4. Какая команда поможет в поиске официального образа httpd?
+
+х docker search --filter is-official=true httpd
+docker search-official httpd
+docker search --official-only httpd
+docker search httpd | grep -i official
+
+5. Что из этого пользователь (аккаунт) и образ (репозиторий) в образе grafana/alpine?
+
+user=alpine, image=alpine
+user=grafana, image=grafana
+х user=grafana, image=alpine
+user=alpine, image=grafana
+
+6. Выбери особенности docker trusted registry (DTR).
+
+х Подпись образов
+Помощь в подготовке облачной инфраструктуры
+х Управление образами и заданиями
+х Встроенный контроль доступа
+Масштабирование приложений
+х Сканирование образов
+
+7. Какой командой можно получить список локальных образов,  имеющих метку org.opencontainers.image.title?
+
+docker images --format "org.opencontainers.image.title"
+docker images --label "org.opencontainers.image.title"
+х docker images --filter "label=org.opencontainers.image.title"
+docker images --filter "org.opencontainers.image.title"
+
+8. Какой командой можно изменить тег webserver:latest на webserver:httpd? (Выбери 2)
+
+docker container image tag webserver:latest webserver:httpd
+docker image retag webserver:latest httpd
+х docker image tag webserver:latest webserver:httpd
+х docker tag webserver:latest webserver:httpd
+
+9. Какой командой можно загрузить образ в приватный реджистри?
+
+docker send <private-registry-address>/<username>/<repo-name>
+х docker push <private-registry-address>/<username>/<repo-name>
+docker push <username>/<repo-name>
+docker upload <repo-name>
+
+10. Ты запускаешь команду docker pull rotorocloud/cosign, но получаешь ошибку. В чем дело?
+
+х У образа rotorocloud/cosign в реестре нет тега latest
+Дело в лимитах Dockerhub - это образ можно скачивать лишь 10 раз в сутки
+Для этой операции нужна авторизация
+Иногда требуется явно указать тег latest в команде - это особенность второй версии протокола
+
